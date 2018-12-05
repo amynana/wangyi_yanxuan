@@ -345,7 +345,7 @@ import Swiper from  "swiper"
   export default {
     name: "home",
     mounted(){
-      new Swiper('.swiper-container-one',{
+        new Swiper('.swiper-container-one',{
         loop:true,
         autoplay:true,
         pagination:{
@@ -358,6 +358,7 @@ import Swiper from  "swiper"
             el:'.swiper-pagination',
           }
         })
+        this.$store.dispatch('getSortLists')
 
     }
   }
@@ -514,6 +515,7 @@ import Swiper from  "swiper"
     .swiper-container-one
       width 100%
       height 100%
+      overflow hidden
       position relative
       .swiper-wrapper
         width 100%
@@ -662,6 +664,7 @@ import Swiper from  "swiper"
         width 100%
         height 100%
         position relative
+        overflow hidden
        .swiper-wrapper
           width 100%
           height 100%

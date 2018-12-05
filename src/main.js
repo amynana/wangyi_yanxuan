@@ -3,11 +3,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
-
+//引入mock数据
+import "./mock/mockServer.js"
+import store from "./store/index.js"
 new Vue({
   el: '#app',
   components: { App },
   template: '<App/>',
-  router
+  router,
+  store,
 })
