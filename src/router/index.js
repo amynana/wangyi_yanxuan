@@ -9,6 +9,7 @@ import Profile from '../routes/Profile/Profile'
 Vue.use(Router)
 
 export default new Router({
+  mode:'history',
   routes:[
     {path:'/home',component:Home},
     {path:'/sort',component:Sort},
