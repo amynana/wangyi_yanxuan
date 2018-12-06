@@ -5,7 +5,7 @@ import Sort from '../routes/Sort/Sort.vue'
 import See from '../routes/See/See'
 import Shop from '../routes/Shop/Shop'
 import Profile from '../routes/Profile/Profile'
-
+import NotFound from "../routes/NotFound/NotFound.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -13,27 +13,49 @@ export default new Router({
   routes:[
     {
       path:'/home',
-      component:Home
+      component:Home,
+      meta:{
+        isShow:true
+      }
     },
     {
       path:'/sort',
-      component:Sort
+      component:Sort,
+      meta: {
+        isShow: true // 标识显示底部导航
+      }
     },
     {
       path:'/see',
-      component:See
+      component:See,
+      meta:{
+        isShow:true
+      }
     },
     {
       path:'/shop',
-      component:Shop
+      component:Shop,
+      meta:{
+        isShow:true
+      }
     },
     {
       path:'/profile',
-      component:Profile
+      component:Profile,
+      meta:{
+        isShow:true
+      }
     },
     {
       path:'/',
-      redirect:"/home"
+      redirect:"/home",
+      meta:{
+        isShow:true
+      }
+    },
+    {
+      path:'/*',  //表示没有匹配的路径
+      component:NotFound
     }
   ]
 })

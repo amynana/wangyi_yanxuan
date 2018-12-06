@@ -9,77 +9,27 @@
     <!--主体部分开始-->
       <div class="main">
         <div class="main-left">
-          <div class="list">
-            <ul class="list-ul">
-              <li class="list-li" v-for="(categroy,index) in categroys" :key="index">
-                <a href="#">{{categroy.name}}</a>
+          <div class="list-left">
+            <ul class="list-ul-left">
+              <li class="list-li-left" v-for="(categroy,index) in categroys" :key="index" @click="leftLiIndex(index)" :class="{on:currentIndex===index}">
+                {{categroy.name}}
               </li>
-
             </ul>
           </div>
         </div>
         <div class="main-right">
-          <div class="main-right-banner">
+          <div class="main-right-banner"  v-for="(categroy,index) in categroys" :key="index"
+               :style="{backgroundImage:`url(${categroy.wapBannerUrl})`}"  v-show="currentIndex ===index">
           </div>
           <div class="right-list">
-            <ul class="list-ul">
-              <li class="list-li">
+            <ul class="list-ul" v-for="(cates,index) in categroys" :key="index"  v-show="currentIndex === index">
+              <li class="list-li" v-for="(shop,index) in cates.subCateList" :key="index"  >
                 <a href="#" class="list-a">
                   <div class="li-img">
-                    <img src="http://yanxuan.nosdn.127.net/39c1c32ca2301ced934e35db33150637.png?imageView&quality=85&thumbnail=144x144" alt="">
+                    <img :src="shop.wapBannerUrl" alt="">
                   </div>
                   <div class="li-name">
-                      三石福利价
-                  </div>
-                </a>
-              </li>
-              <li class="list-li">
-                <a href="#" class="list-a">
-                  <div class="li-img">
-                    <img src="http://yanxuan.nosdn.127.net/39c1c32ca2301ced934e35db33150637.png?imageView&quality=85&thumbnail=144x144" alt="">
-                  </div>
-                  <div class="li-name">
-                    三石福利价
-                  </div>
-                </a>
-              </li>
-              <li class="list-li">
-                <a href="#" class="list-a">
-                  <div class="li-img">
-                    <img src="http://yanxuan.nosdn.127.net/39c1c32ca2301ced934e35db33150637.png?imageView&quality=85&thumbnail=144x144" alt="">
-                  </div>
-                  <div class="li-name">
-                    三石福利价
-                  </div>
-                </a>
-              </li>
-              <li class="list-li">
-                <a href="#" class="list-a">
-                  <div class="li-img">
-                    <img src="http://yanxuan.nosdn.127.net/39c1c32ca2301ced934e35db33150637.png?imageView&quality=85&thumbnail=144x144" alt="">
-                  </div>
-                  <div class="li-name">
-                    三石福利价
-                  </div>
-                </a>
-              </li>
-              <li class="list-li">
-                <a href="#" class="list-a">
-                  <div class="li-img">
-                    <img src="http://yanxuan.nosdn.127.net/39c1c32ca2301ced934e35db33150637.png?imageView&quality=85&thumbnail=144x144" alt="">
-                  </div>
-                  <div class="li-name">
-                    三石福利价
-                  </div>
-                </a>
-              </li>
-              <li class="list-li">
-                <a href="#" class="list-a">
-                  <div class="li-img">
-                    <img src="http://yanxuan.nosdn.127.net/39c1c32ca2301ced934e35db33150637.png?imageView&quality=85&thumbnail=144x144" alt="">
-                  </div>
-                  <div class="li-name">
-                    三石福利价
+                      {{shop.name}}
                   </div>
                 </a>
               </li>
@@ -92,14 +42,42 @@
 
 <script>
     import {mapState} from "vuex"
+    import BScroll from "better-scroll"
     export default {
         name: "sort",
+        data(){
+          return {
+            currentIndex:0,
+            toggleOn:false,
+          }
+        },
         mounted(){
           this.$store.dispatch('getCategroys')
         },
         computed:{
-          ...mapState(["categroys"])
+          ...mapState(["categroys"]),
+
+        },
+      watch:{
+        categroys(){
+          this.$nextTick(()=>{
+            new BScroll('.list-left',{
+              click:true
+
+            })
+          })
         }
+      },
+      methods:{
+        leftLiIndex(index){
+          this.currentIndex = index
+          if(this.currentIndex = index){
+            this.toggleOn = ! this.toggleOn
+          }
+
+          return this.currentIndex
+        }
+      }
 
     }
 </script>
@@ -135,15 +113,14 @@
     position relative
     .main-left
       width 1.62rem
-      .list
+      .list-left
         width 100%
         height 100%
         position relative
         top-border-1px(rgb(white))
-        .list-ul
+        .list-ul-left
           width 100%
-          height 100%
-          .list-li
+          .list-li-left
             width 1.62rem
             height .5rem
             margin-bottom 0.4rem
@@ -151,10 +128,14 @@
             color rgb(51,51,51)
             text-align center
             line-height .5rem
+            &.on
+              font-size .28rem
+              color rgb(171,43,43)
+              border-left 0.03rem solid rgb(171,43,43)
+
 
     .main-right
       width 77%
-      border 1px solid red
       position absolute
       top 0
       right 0
@@ -162,14 +143,15 @@
         width 5.28rem
         height 1.92rem
         margin-left .24rem
-        background-image:url(http://yanxuan.nosdn.127.net/52855d9a0c1f738f26ac125913af0012.jpg?imageView&thumbnail=0x196&quality=75);
         background-size 100% 100%
-
+        background-position 0 0
+        position absolute
       .right-list
         width 5.28rem
         height 10rem
-        margin-top .4rem
+        margin-top 2rem
         margin-left .24rem
+        position relative
         .list-ul
           width 100%
           height 100%
@@ -177,6 +159,9 @@
           justify-content space-between
           flex-wrap wrap
           align-content flex-start
+          position absolute
+          top 0
+          left 0
           .list-li
             width 1.44rem
             height 2.16rem
