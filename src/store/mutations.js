@@ -1,9 +1,15 @@
-import {GETSORTLISTS} from "./mutations-type.js"
+import {GETSORTLISTS,GETSCROLLIMG,GETCATEGROYS} from "./mutations-type.js"
 
 
 
 export default {
-  [GETSORTLISTS](state){
-    state.
+  [GETSORTLISTS](state,{sortLists}){
+    state.sortLists = sortLists
+  },
+  [GETSCROLLIMG](state,{scrollImgs}){
+    state.scrollImgs = scrollImgs
+  },
+  [GETCATEGROYS](state,{categroys}){
+    state.categroys = categroys
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="srcoll-wrap">
-      <div class="hdWraper">
+      <div class="hdWraper" >
         <div class="m-hd">
           <div class="line">
             <a href="#" class="logo"></a>
@@ -16,26 +16,10 @@
               <header>
                 <div class="inner">
                   <div class="list">
-                    <div class="tab active"><span class="txt">居家</span>
+                    <div class="tab" :class="{active:toggleLine}" v-for="(list,index) in sortLists " :key="index">
+                      <span class="txt" >{{list.text}}</span>
                     </div>
-                    <div class="tab"><span class="txt">鞋包配饰</span>
-                    </div>
-                    <div class="tab"><span class="txt">服装</span>
-                    </div>
-                    <div class="tab"><span class="txt">电器</span>
-                    </div>
-                    <div class="tab"><span class="txt">洗护</span>
-                    </div>
-                    <div class="tab"><span class="txt">饮食</span>
-                    </div>
-                    <div class="tab"><span class="txt">餐厨</span>
-                    </div>
-                    <div class="tab"><span class="txt">婴童</span>
-                    </div>
-                    <div class="tab"><span class="txt">文体</span>
-                    </div>
-                    <div class="tab"><span class="txt">特色区</span>
-                    </div>
+
                   </div>
                 </div>
               </header>
@@ -53,30 +37,10 @@
         <div>
           <!--轮播图部分-->
           <div class="slideWarp">
-           <!-- <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="https://yanxuan.nosdn.127.net/850c005113e5becbfd98d797b8a2101a.jpg?imageView&quality=75&thumbnail=750x0" alt="tu">
-              </div>
-            </div>-->
             <div class="swiper-container-one">
               <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <img src="https://yanxuan.nosdn.127.net/850c005113e5becbfd98d797b8a2101a.jpg?imageView&quality=75&thumbnail=750x0" alt="tu">
-                </div>
-                <div class="swiper-slide">
-                  <img src="https://yanxuan.nosdn.127.net/e0c3e253dcfdb170bda823ac5b71247e.jpg?imageView&quality=75&thumbnail=750x0" alt="">
-                </div>
-                <div class="swiper-slide">
-                  <img src="https://yanxuan.nosdn.127.net/018b7902a3fb1e48dbdd8b7bb42674aa.jpg?watermark&type=1&gravity=northwest&dx=0&dy=0&image=YTRhMmIzYmI1Y2I1YTc4ZGM5MmE3Nzk2NzAwYTFiNjgucG5n|imageView&quality=75&thumbnail=750x0" alt="">
-                </div>
-                <div class="swiper-slide">
-                  <img src="https://yanxuan.nosdn.127.net/5a2289149a59ca24ef2256674542e4cb.jpg?imageView&quality=75&thumbnail=750x0" alt="">
-                </div>
-                <div class="swiper-slide">
-                  <img src="https://yanxuan.nosdn.127.net/fda101d5e6beeb56d0ff8245139ff30b.jpg?imageView&quality=75&thumbnail=750x0" alt="">
-                </div>
-                <div class="swiper-slide">
-                  <img src="https://yanxuan.nosdn.127.net/03d8a81e7be4bb1a8d44dc2118f944a4.jpg?imageView&quality=75&thumbnail=750x0" alt="">
+                <div class="swiper-slide" v-for="(sImg,index) in scrollImgs" :key="index">
+                  <img :src="sImg.picUrl" alt="tu">
                 </div>
               </div>
               <!-- 如果需要分页器 -->
@@ -342,16 +306,16 @@
 import BScroll from "better-scroll"
 import 'swiper/dist/css/swiper.min.css'
 import Swiper from  "swiper"
+import {mapState} from "vuex"
   export default {
     name: "home",
+    data(){
+      return {
+        toggleLine:false
+      }
+    },
     mounted(){
-        new Swiper('.swiper-container-one',{
-        loop:true,
-        autoplay:true,
-        pagination:{
-          el:'.swiper-pagination-bar',
-        }
-      })
+
         new Swiper('.swiper-container-two',{
           loop:true,
           pagination:{
@@ -359,8 +323,39 @@ import Swiper from  "swiper"
           }
         })
         this.$store.dispatch('getSortLists')
+        this.$store.dispatch('getScrollImg')
 
-    }
+    },
+    computed:{
+      ...mapState(["sortLists","scrollImgs"])
+    },
+    methods:{
+
+    },
+    watch:{
+      sortLists(){
+        this.$nextTick(()=>{
+          new BScroll('.inner',{
+            click:true,
+            scrollX:true,
+          })
+        })
+      },
+      scrollImgs(){
+        this.$nextTick(()=>{
+          new Swiper('.swiper-container-one',{
+            loop:true,
+            autoplay:true,
+            pagination:{
+              el:'.swiper-pagination-bar',
+            }
+          })
+        })
+      }
+
+
+    },
+
   }
 </script>
 
@@ -536,7 +531,7 @@ import Swiper from  "swiper"
         right 0
         bottom 0
         margin auto
-        z-index 99
+        z-index 1
         text-align center
         line-height .9rem
   .g-grow

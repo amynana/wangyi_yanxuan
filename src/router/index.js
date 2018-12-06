@@ -11,11 +11,29 @@ Vue.use(Router)
 export default new Router({
   mode:'history',
   routes:[
-    {path:'/home',component:Home},
-    {path:'/sort',component:Sort},
-    {path:'/see',component:See},
-    {path:'/shop',component:Shop},
-    {path:'/profile',component:Profile},
-    {path:'/',redirect:"/home"}
+    {
+      path:'/home',
+      component:Home
+    },
+    {
+      path:'/sort',
+      component:Sort
+    },
+    {
+      path:'/see',
+      component:See
+    },
+    {
+      path:'/shop',
+      component:Shop
+    },
+    {
+      path:'/profile',
+      component:Profile
+    },
+    {
+      path:'/',
+      redirect:"/home"
+    }
   ]
 })
