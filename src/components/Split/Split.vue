@@ -1,5 +1,5 @@
 <template>
-    
+    <div class="one-white"></div>
 </template>
 
 <script>
@@ -8,6 +8,8 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+  .one-white
+    width 100%
+    height .3rem
 </style>

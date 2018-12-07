@@ -1,5 +1,5 @@
-import {GETSORTLISTS,GETSCROLLIMG,GETCATEGROYS} from "./mutations-type.js"
-import {reqSortLists,reqscrollImg,reqCategroy} from "../api/index.js"
+import {GETSORTLISTS,GETSCROLLIMG,GETCATEGROYS,GETRECOMMENDS} from "./mutations-type.js"
+import {reqSortLists,reqscrollImg,reqCategroy,reqRecommend} from "../api/index.js"
 
 export default{
  async getSortLists({commit}){
@@ -15,8 +15,6 @@ export default{
     if(result.code===0){
      const scrollImgs = result.data
       commit(GETSCROLLIMG,{scrollImgs})
-      console.log("数据你")
-      console.log(scrollImgs)
     }
   },
   async getCategroys({commit}){
@@ -24,6 +22,14 @@ export default{
     if(result.code===0){
      const categroys = result.data
       commit(GETCATEGROYS,{categroys})
+    }
+  },
+  async getRecommends({commit}){
+    const result = await reqRecommend()
+    if(result.code ==='200'){ //这里的响应码是字符串所以要用这个字符
+      const recommends = result.data
+      console.log(recommends)
+      commit(GETRECOMMENDS,{recommends})
     }
   }
 

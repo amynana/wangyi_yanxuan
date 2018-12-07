@@ -32,6 +32,7 @@
   @import "../../common/stylus/mixins.styl"
   .between
     position relative
+    background-color white
     .between-left
       width 100%
       height 3.5rem

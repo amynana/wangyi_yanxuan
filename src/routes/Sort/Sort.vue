@@ -19,8 +19,8 @@
         </div>
       </div>
       <div class="main-right">
-        <div class="main-right-banner" v-for="(categroy,index) in categroys" :key="categroy.id"
-             :style="{backgroundImage:`url(${categroy.wapBannerUrl})`}" v-show="currentIndex ===index">
+        <div class="main-right-banner" v-if="categroys[currentIndex]"
+             :style="{backgroundImage:`url(${categroys[currentIndex].wapBannerUrl})`}">
         </div>
         <div>
           <div class="right-list">
@@ -96,7 +96,7 @@
             click: true
           })
           if (!this.rightScroll) {
-            this.rightScroll = new BScroll('.right-list', {
+            this.rightScroll = new BScroll('.gundong', {
               click: true,
             })
           } else {
@@ -197,10 +197,12 @@
           overflow auto
           .gundong
             width 100%
+            height 9rem
             position absolute
             .right-wrap
               width 100%
-              height 9rem
+              position absolute
+              clearFix()
               .list-ul
                 width 100%
                 display flex
