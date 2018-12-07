@@ -1,4 +1,4 @@
-import {GETSORTLISTS,GETSCROLLIMG,GETCATEGROYS,GETRECOMMENDS} from "./mutations-type.js"
+import {GETSORTLISTS,GETSCROLLIMG,GETCATEGROYS,GETRECOMMENDS,GETSEESORTS,GETSEETWOS} from "./mutations-type.js"
 
 
 
@@ -14,5 +14,11 @@ export default {
   },
   [GETRECOMMENDS](state,{recommends}){
     state.recommends = recommends
+  },
+  [GETSEESORTS](state,{seeSorts}){
+    state.seeSorts = seeSorts
+  },
+  [GETSEETWOS](state,{seeTwos}){
+    state.seeTwos = seeTwos
   }
 }

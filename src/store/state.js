@@ -2,5 +2,7 @@ export default {
   sortLists:[],
   scrollImgs:[],
   categroys:[],
-  recommends:[]
+  recommends:[],
+  seeSorts:[],
+  seeTwos:{},
 }

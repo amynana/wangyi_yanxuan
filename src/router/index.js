@@ -30,7 +30,7 @@ export default new Router({
       component:See,
       meta:{
         isShow:true
-      }
+      },
     },
     {
       path:'/shop',

@@ -2,24 +2,25 @@
     <div class="updown">
       <div class="u-name">
               <span class="s-avar">
-                <img src="https://yanxuan.nosdn.127.net/6311ec4540ebe620ddcd49b10e08a8f6.png?imageView&quality=65&thumbnail=56y56" alt="">
+                <img :src="top.avatar" alt="">
               </span>
-        <span class="s-name">服装组&nbsp;小服</span>
+        <span class="s-name">{{top.nickname}}</span>
       </div>
-      <div class="u-title">揭秘2018严选商品线隐藏进阶之路，为美好生活品质加分</div>
+      <div class="u-title">{{top.title}}</div>
       <div class="u-pic">
-        <img src="https://yanxuan.nosdn.127.net/2dad391fc894261717d59c1e31e221f8.jpg?imageView&quality=65&thumbnail=690y376" alt="">
+        <img :src="top.picUrl" alt="">
       </div>
       <div class="u-rcount">
         <i class="iconfont icon-kanguos myicon"></i>
-        <span>33k人看过</span>
+        <span>{{top.readCount}}</span>
       </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "UpDown"
+        name: "UpDown",
+        props:["top"]
     }
 </script>
 
@@ -27,12 +28,11 @@
   @import "../../common/stylus/mixins.styl"
   .updown
     width 100%
-    background-color white
-    height 8rem
+    height 6.2rem
     .u-name
       width 4rem
       height .85rem
-      margin .3rem
+      margin-left .3rem
       display flex
       justify-content flex-start
       .s-avar
@@ -61,6 +61,9 @@
       font-size .34rem
       color rgb(51,51,51)
       margin-bottom .2rem
+      white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
     .u-pic
       width 92%
       height 3.5rem

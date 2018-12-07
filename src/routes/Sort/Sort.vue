@@ -79,7 +79,7 @@
     data() {
       return {
         currentIndex: 0,
-        toggleOn: false,
+       // toggleOn: false,
       }
     },
     mounted() {
@@ -110,7 +110,7 @@
       leftLiIndex(index) {
         this.currentIndex = index
         if (this.currentIndex = index) {
-          this.toggleOn = !this.toggleOn
+         // this.toggleOn = !this.toggleOn
         }
 
         return this.currentIndex

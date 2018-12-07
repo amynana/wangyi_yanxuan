@@ -28,34 +28,47 @@
         </div>
         <div class="sort-list">
           <ul class="sort-ul">
-            <li class="sort-li on">推荐</li>
-            <li class="sort-li">达人</li>
-            <li class="sort-li">上新</li>
-            <li class="sort-li">晒单</li>
-            <li class="sort-li">HOME</li>
+            <li v-for="(seeSort,index) in seeSorts" :key="seeSort.tabId" class="sort-li" :class="{on:currentIndex ===index}"
+                @click="getCurrentIndex(index)" >{{seeSort.tabName}}</li>
           </ul>
         </div>
       </div>
       <!--内容部分-->
-    <div class="Scroll">
-      <div class="content-scroll">
-        <div class="content">
-          <div class="main-one">
-            <div class="one-img">
-              <img
-                src="https://yanxuan.nosdn.127.net/b7db4d98e47a94adda8b4d61bc5f4af0.jpg?imageView&quality=65&thumbnail=690y376"
-                alt="">
+      <div class="Recommend">
+      <!--内容部分-->
+      <div class="Scroll">
+        <div class="content-scroll">
+          <div class="content" v-for="(commend,index) in recommends" :key="index" v-if="currentIndex == 0">
+            <div class="main-one" v-if="commend.ad">
+              <div class="one-img">
+                <img :src="commend.ad.picUrl" alt="">
+              </div>
             </div>
+            <div class="left-right" v-for="(top,index) in commend.topics " :key="index">
+              <see-between v-if="top.type === 1" :top="top"></see-between>
+            </div>
+            <div class="left-right" v-for="(top,index) in commend.topics " :key="top.index">
+              <up-down v-if="top.type === 0" :top="top"></up-down>
+            </div>
+
           </div>
-          <div class="wrap-all">
-            <see-between></see-between>
-            <split/>
-            <up-down></up-down>
+
+          <div class="show-two" v-for="(seeTwo,index) in seeTwos.result" :key="index" v-if="currentIndex ===1">
+            <div class="left-right">
+              <split/>
+              <see-between v-if="seeTwo.type === 1 || seeTwo.type == 2" :top="seeTwo"></see-between>
+             
+            </div>
+            <div class="left-right">
+              <up-down v-if="seeTwo.type === 0" :top="seeTwo"></up-down>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
+
+
 
 
   </div>
@@ -66,6 +79,7 @@
   import Split from "../../components/Split/Split.vue"
   import UpDown from "../../components/UpDown/UpDown.vue"
   import BScroll from "better-scroll"
+  import {mapState} from "vuex"
   export default {
     name: "see",
     components: {
@@ -73,13 +87,28 @@
       seeBetween,
       Split
     },
+    data(){
+      return {
+        currentIndex:0,
+      }
+    },
+    computed:{
+      ...mapState(["seeSorts","recommends","seeTwos"])
+    },
     mounted(){
       this.$store.dispatch('getRecommends')
-
+      this.$store.dispatch('getSeeSorts')
+      this.$store.dispatch('getSeeTwos')
       new BScroll('.Scroll',{
         click:true,
       })
     },
+    methods:{
+      getCurrentIndex(index){
+        this.currentIndex = index
+        return this.currentIndex
+      }
+    }
   }
 </script>
 
@@ -180,12 +209,15 @@
               color rgb(180, 40, 45)
 
 
-    .Scroll
+
+    .Recommend
       width 100%
-      height 11rem
-      overflow hidden
-      .content-scroll
+      .Scroll
         width 100%
+        height 12rem
+        overflow hidden
+        .content-scroll
+          width 100%
         .content
           width 100%
           margin-top .8rem
@@ -195,13 +227,12 @@
             background-color white
             display flex
             justify-items center
+            margin-top -0.3rem
+            margin-bottom .3rem
             .one-img
               width 92%
               margin auto
               img
                 width 100%
-          .wrap-all
-            width 100%
-            border 1px solid red
 
 </style>
