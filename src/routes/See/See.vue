@@ -36,8 +36,16 @@
       </ul>
     </div>
   </div>
+  <!--内容部分-->
   <div class="content">
-
+      <div class="main-one">
+        <div class="one-img">
+          <img src="https://yanxuan.nosdn.127.net/b7db4d98e47a94adda8b4d61bc5f4af0.jpg?imageView&quality=65&thumbnail=690y376" alt="">
+        </div>
+      </div>
+      <div class="wrap-all">
+        <see-between></see-between>
+      </div>
   </div>
 
 
@@ -45,8 +53,12 @@
 </template>
 
 <script>
+  import seeBetween from "../../components/SeeBetween/SeeBetween.vue"
   export default {
-    name: "see"
+    name: "see",
+    components:{
+      seeBetween,
+    }
   }
 </script>
 
@@ -119,29 +131,46 @@
           .icon-three
             font-size .45rem
 
-
-
-    .sort-list
-      width 100%
-      height .7rem
-      bottom-border-1px(rgb(127,127,127))
-      .sort-ul
-        width 90%
+      .sort-list
+        width 100%
         height .7rem
-        margin auto
-        display flex
-        justify-content space-between
-        flex-flow row nowrap
-        .sort-li
-          width .8rem
+        bottom-border-1px(rgb(127,127,127))
+        .sort-ul
+          width 90%
           height .7rem
-          font-size .16rem
-          color rgb(127,127,127)
-          line-height .7rem
-          text-align center
-          &.on
-            border-bottom 0.04rem solid rgb(180, 40, 45)
-            color rgb(180, 40, 45)
+          margin auto
+          display flex
+          justify-content space-between
+          flex-flow row nowrap
+          .sort-li
+            width .8rem
+            height .7rem
+            font-size .16rem
+            color rgb(127,127,127)
+            line-height .7rem
+            text-align center
+            &.on
+              border-bottom 0.04rem solid rgb(180, 40, 45)
+              color rgb(180, 40, 45)
 
 
+
+    .content
+      width 100%
+      margin-top .8rem
+      .main-one
+        width 100%
+        height 4.5rem
+        background-color white
+        display flex
+        justify-items center
+        .one-img
+          width 92%
+          margin auto
+          img
+            width 100%
+
+      .wrap-all
+        width 100%
+        border 1px solid
 </style>
