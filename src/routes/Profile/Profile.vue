@@ -1,69 +1,105 @@
 <template>
     <div class="myLogin">
-      <div class="see-top">
-        <div class="top-watch">
-          <div class="top-home" @click="$router.replace('/home')">
-            <a href="">
-              <i class="iconfont icon-shouye icon-one"></i>
-            </a>
-          </div>
-          <div class="top-select">
+      <div class="login-wrap" v-if="isShow">
+        <div class="see-top">
+          <div class="top-watch">
+            <div class="top-home" @click="$router.replace('/home')">
+              <a href="">
+                <i class="iconfont icon-shouye icon-one"></i>
+              </a>
+            </div>
+            <div class="top-select">
             <span class="top-img">
               网易严选
             </span>
-          </div>
-          <div class="top-cart">
-            <a href="">
-              <i class="iconfont icon-sousuo  icon-two"></i>
-            </a>
-          </div>
-          <div class="top-search">
-            <a href="">
-              <i class="iconfont icon-duogouwu icon-three"></i>
-            </a>
+            </div>
+            <div class="top-cart">
+              <a href="">
+                <i class="iconfont icon-sousuo  icon-two"></i>
+              </a>
+            </div>
+            <div class="top-search">
+              <a href="">
+                <i class="iconfont icon-duogouwu icon-three"></i>
+              </a>
+            </div>
+
           </div>
 
         </div>
-
+        <div class="main" >
+          <div class="main-img">
+            <img src="./yanxuan2.png" alt="">
+          </div>
+          <div class="login">
+            <div class="phone-login" @click="showPhone">
+              <i class="iconfont icon-shouji myicon"></i>
+              <span class="phone-s">手机号码登录</span>
+            </div>
+            <div class="emil-login" @click="showEmil">
+              <i class="iconfont icon-duanxin myicon"></i>
+              <span emil-s>邮箱账号登录</span>
+            </div>
+            <div class="speed-login" @click="isShow = false">
+              <span class="speed-s">手机快捷注册</span>
+              <i class="iconfont icon-xiayibu myicon"></i>
+            </div>
+          </div>
+          <div class="foot">
+            <div class="foot-one">
+              <span class="foot-xin">微信</span>
+            </div>
+            <div class="foot-two">
+              <span class="foot-xin">QQ</span>
+            </div>
+            <div class="foot-three">
+              <span class="foot-xin">微博</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="main">
-        <div class="main-img">
-          <img src="./yanxuan2.png" alt="">
-        </div>
-        <div class="login">
-          <div class="phone-login">
-            <i class="iconfont icon-shouji myicon"></i>
-            <span class="phone-s">手机号码登录</span>
-          </div>
-          <div class="emil-login">
-            <i class="iconfont icon-duanxin myicon"></i>
-            <span emil-s>邮箱账号登录</span>
-          </div>
-          <div class="speed-login">
-            <span class="speed-s">手机快捷注册</span>
-            <i class="iconfont icon-xiayibu myicon"></i>
-          </div>
-        </div>
-        <div class="foot">
-          <div class="foot-one">
-            <span class="foot-xin">微信</span>
-          </div>
-          <div class="foot-two">
-            <span class="foot-xin">QQ</span>
-          </div>
-          <div class="foot-three">
-            <span class="foot-xin">微博</span>
-          </div>
-        </div>
 
-
-      </div>
+      <PhoneLogin v-if="onlyPhone" @goPhone="goPhone"></PhoneLogin>
+      <EmilLogin v-if="onlyEmil" @goEmil="goEmil"></EmilLogin>
     </div>
 </template>
 
 <script>
+  import PhoneLogin from "../../components/PhoneLogin/PhoneLogin.vue"
+  import EmilLogin from "../../components/EmilLogin/EmilLogin.vue"
     export default {
-        name: "profile"
+        name: "profile",
+        data(){
+          return {
+            isShow:true, //表示显示登录界面
+            onlyPhone:false,//表示显示手机登录界面
+            onlyEmil:false, //表示显示邮箱登录
+          }
+        },
+        components:{
+          PhoneLogin,
+          EmilLogin,
+        },
+        methods:{
+          showPhone(){
+            this.isShow = false
+            this.onlyPhone = true
+            this.onlyEmil = false
+          },
+          showEmil(){
+            this.isShow = false
+            this.onlyEmil = true
+            this.onlyPhone = false
+          },
+          goPhone(){
+            this.isShow = true
+            this.onlyPhone = false
+          },
+          goEmil(){
+            this.isShow = true
+            this.onlyEmil = false
+          }
+        },
     }
 </script>
 

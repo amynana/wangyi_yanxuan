@@ -14,7 +14,7 @@
         <span>去添点什么吧</span>
       </div>
 
-      <div class="login">
+      <div class="login" @click="$router.replace('/profile')">
           登录
       </div>
     </div>

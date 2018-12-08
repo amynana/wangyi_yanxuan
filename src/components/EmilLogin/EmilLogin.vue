@@ -1,84 +1,64 @@
 <template>
-    <div class="myPhone">
-        <div class="only-p">
-          <div class="see-top">
-            <div class="top-watch">
-              <div class="top-home" @click="$router.replace('/home')">
-                <a href="">
-                  <i class="iconfont icon-shouye icon-one"></i>
-                </a>
-              </div>
-              <div class="top-select">
+  <div class="myPhone">
+    <div class="only-p">
+      <div class="see-top">
+        <div class="top-watch">
+          <div class="top-home" @click="$router.replace('/home')">
+            <a href="">
+              <i class="iconfont icon-shouye icon-one"></i>
+            </a>
+          </div>
+          <div class="top-select">
             <span class="top-img">
               网易严选
             </span>
-              </div>
-              <div class="top-cart">
-                <a href="">
-                  <i class="iconfont icon-sousuo  icon-two"></i>
-                </a>
-              </div>
-              <div class="top-search">
-                <a href="">
-                  <i class="iconfont icon-duogouwu icon-three"></i>
-                </a>
-              </div>
-
-            </div>
-
           </div>
-          <div class="phone-main">
-            <div class="p-img">
-              <img src="./yanxuan-small.png" alt="">
-            </div>
-            <div class="login-method">
-              <div class="phone-number">
-                <input type="text" placeholder="请输入手机号" v-model.lazy="telephone" maxlength="11">
-              </div>
-              <div class="message">
-                <input type="text" placeholder="请输入短信验证码">
-                <button @click="getTelephone">{{getCode}}</button>
-              </div>
-              <div class="mes-login">
-                <span>遇到问题?</span>
-                <span>使用密码验证登录</span>
-              </div>
-              <div class="goto-login">登录</div>
-              <div class="other-method"  @click="handleC">其他登录方式</div>
-              <div class="register">
-                <span >注册账号</span>
-                <i class="iconfont icon-xiayibu myicon"></i>
-              </div>
-            </div>
+          <div class="top-cart">
+            <a href="">
+              <i class="iconfont icon-sousuo  icon-two"></i>
+            </a>
           </div>
+          <div class="top-search">
+            <a href="">
+              <i class="iconfont icon-duogouwu icon-three"></i>
+            </a>
+          </div>
+
         </div>
+
+      </div>
+      <div class="phone-main">
+        <div class="p-img">
+          <img src="./yanxuan-small.png" alt="">
+        </div>
+        <div class="login-method">
+          <div class="phone-number">
+            <input type="text" placeholder="账号">
+          </div>
+          <div class="message">
+            <input type="text" placeholder="密码">
+          </div>
+          <div class="mes-login">
+            <span>注册账号</span>
+            <span>忘记密码</span>
+          </div>
+          <div class="goto-login">登录</div>
+          <div class="other-method" @click="handleC">其他登录方式</div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "PhoneLogin",
-        data(){
-          return {
-            telephone:"",
-            getCode:"获取验证码",
-
-          }
-        },
-        methods:{
-          handleC(){
-            this.$emit("goPhone")
-          },
-          getTelephone(){
-            if(!(/^\d{10}\d$/.test(this.telephone))){
-              this.getCode = ""
-            }
-          }
-        },
-
-
-
+  export default {
+    name: "PhoneLogin",
+    methods:{
+     handleC(){
+       this.$emit("goEmil")
+     }
     }
+  }
 </script>
 
 <style scoped lang="stylus">
@@ -234,22 +214,6 @@
           line-height .9rem
           font-size .28rem
           border-radius 0.04rem
-
-        .register
-          width 100%
-          height .9rem
-          margin-top .3rem
-          border 1px solid rgb(180, 40, 45)
-
-          text-align center
-          line-height .9rem
-          font-size .28rem
-          border-radius 0.04rem
-          span
-            color rgb(51,51,51)
-
-          .myicon
-            font-size .3rem
 
 
 
