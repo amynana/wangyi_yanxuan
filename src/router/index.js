@@ -42,9 +42,6 @@ export default new Router({
     {
       path:'/profile',
       component:Profile,
-      meta:{
-        isShow:true
-      }
     },
     {
       path:'/',

@@ -684,6 +684,9 @@ import {mapState} from "vuex"
                 color rgb(51,51,51)
                 font-size .24rem
                 text-align center
+                text-overflow ellipsis
+                white-space nowrap
+                overflow hidden
 
         .swiper-pagination
           position absolute

@@ -5,7 +5,7 @@
         <div class="top-watch">
           <div class="top-home">
             <a href="">
-              <i class="iconfont icon-jianyuede icon-one"></i>
+              <i class="iconfont icon-shouye icon-one"></i>
             </a>
           </div>
           <div class="top-select">
@@ -16,7 +16,7 @@
           </div>
           <div class="top-cart">
             <a href="">
-              <i class="iconfont icon-listgouwu icon-two"></i>
+              <i class="iconfont icon-duogouwu icon-two"></i>
             </a>
           </div>
           <div class="top-search">
@@ -55,12 +55,11 @@
 
           <div class="show-two" v-for="(seeTwo,index) in seeTwos.result" :key="index" v-if="currentIndex ===1">
             <div class="left-right">
-              <split/>
               <see-between v-if="seeTwo.type === 1 || seeTwo.type == 2" :top="seeTwo"></see-between>
-             
             </div>
             <div class="left-right">
               <up-down v-if="seeTwo.type === 0" :top="seeTwo"></up-down>
+
             </div>
           </div>
         </div>
@@ -227,12 +226,14 @@
             background-color white
             display flex
             justify-items center
-            margin-top -0.3rem
-            margin-bottom .3rem
+            margin-top -0.6rem
             .one-img
               width 92%
               margin auto
               img
                 width 100%
 
+        .show-two
+          &:first-child
+            margin-top .8rem
 </style>

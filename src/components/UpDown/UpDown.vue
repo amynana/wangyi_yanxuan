@@ -29,6 +29,8 @@
   .updown
     width 100%
     height 6.2rem
+    background-color white
+    margin-top .2rem
     .u-name
       width 4rem
       height .85rem

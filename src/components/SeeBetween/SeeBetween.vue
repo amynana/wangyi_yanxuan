@@ -43,6 +43,7 @@
   .between
     position relative
     background-color white
+    margin-top .2rem
     .between-left
       width 100%
       height 3.5rem
