@@ -1,5 +1,21 @@
-import {GETSORTLISTS,GETSCROLLIMG,GETCATEGROYS,GETRECOMMENDS,GETSEESORTS,GETSEETWOS} from "./mutations-type.js"
-import {reqSortLists,reqscrollImg,reqCategroy,reqRecommend,reqSeeSorts,reqSeeTwos} from "../api/index.js"
+import {
+  GETSORTLISTS,
+  GETSCROLLIMG,
+  GETCATEGROYS,
+  GETRECOMMENDS,
+  GETSEESORTS,
+  GETSEETWOS,
+  GETSMSCODE
+} from "./mutations-type.js"
+import {
+  reqSortLists,
+  reqscrollImg,
+  reqCategroy,
+  reqRecommend,
+  reqSeeSorts,
+  reqSeeTwos,
+  reqSendCode,
+} from "../api/index.js"
 
 export default{
  async getSortLists({commit}){
@@ -44,7 +60,9 @@ export default{
       const seeTwos = result.data
       commit(GETSEETWOS,{seeTwos})
     }
-  }
+  },
+
+
 
 
 

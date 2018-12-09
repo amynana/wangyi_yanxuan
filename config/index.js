@@ -17,7 +17,14 @@ module.exports = {
         pathRewrite: {
           '^/api': '/'
         }
-      }
+      },
+      '/houtai': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/houtai': '/'
+        }
+      },
     },
 
     // Various Dev Server settings

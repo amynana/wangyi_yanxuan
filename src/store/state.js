@@ -5,4 +5,5 @@ export default {
   recommends:[],
   seeSorts:[],
   seeTwos:{},
+  SmsCode:"",
 }

@@ -33,17 +33,21 @@
             </div>
             <div class="login-method">
               <div class="phone-number">
-                <input type="text" placeholder="请输入手机号" v-model.lazy="telephone" maxlength="11">
+                <input type="text" placeholder="请输入手机号" v-model.lazy="telephone" maxlength="11"
+                @focus="getFocus">
               </div>
-              <div class="message">
-                <input type="text" placeholder="请输入短信验证码">
-                <button @click="getTelephone">{{getCode}}</button>
+              <div class="message" v-if="useSms">
+                <input type="text" placeholder="请输入短信验证码" v-model="code">
+                <button @click="getTelephone" :disabled="!isRightNumber || computedTime > 0">{{getCode}}</button>
+              </div>
+              <div class="message" v-else>
+                <input type="text" placeholder="请输入登录密码">
               </div>
               <div class="mes-login">
                 <span>遇到问题?</span>
-                <span>使用密码验证登录</span>
+                <span @click=" useSms = ! useSms">{{useSms?`使用密码登录`:`使用短信登录`}}</span>
               </div>
-              <div class="goto-login">登录</div>
+              <div class="goto-login" @click="login">登录</div>
               <div class="other-method"  @click="handleC">其他登录方式</div>
               <div class="register">
                 <span >注册账号</span>
@@ -56,24 +60,92 @@
 </template>
 
 <script>
-    export default {
+  import {reqSendCode,reqSmsCode} from "../../api";
+  import {Toast,MessageBox} from "mint-ui"
+
+  export default {
         name: "PhoneLogin",
         data(){
           return {
-            telephone:"",
+            useSms:true,//表示使用手机验证码登录
             getCode:"获取验证码",
-
+            computedTime:0,  //短信发送的时间
+            isRightNumber:true, //是否是对的手机号
+            telephone:"", //input中的手机号码
+            code:"",//短信验证码
+          }
+        },
+        watch:{
+          telephone(val){ //监视输入的号码，如果小于11那么每次进来都重置为空
+            if(val.length < 11){
+             return this.telephone = ""
+            }
           }
         },
         methods:{
           handleC(){
             this.$emit("goPhone")
           },
-          getTelephone(){
+          async  getTelephone(){ //验证手机号是否正确
             if(!(/^\d{10}\d$/.test(this.telephone))){
-              this.getCode = ""
+              this.isRightNumber = !this.isRightNumber
+              this.getCode = "手机号不对"
+            }else{
+              this.isRightNumber = true
+              this.computedTime = 30
+              //发送请求获得验证码
+            const result  = await reqSendCode(this.telephone)
+              if(result.code === 0){
+                Toast("验证码已发送")
+              }else {
+                this.computedTime = 0
+                MessageBox.alert("发送验证码失败")
+              }
+
+             let timer = setInterval(()=>{
+                this.computedTime--
+                this.getCode = `已发送${this. computedTime}`
+               if(this.computedTime<=0){
+                 this.computedTime = 0
+                 clearInterval(timer)
+                 this.getCode = "获取验证码"
+               }
+               return
+              },1000)
             }
+          },
+          getFocus(){//当input获得焦点时
+            this.isRightNumber = true
+            this. getCode = "获取验证码"
+            return (this.isRightNumber,this. getCode)
+          },
+          async login(){//用户登录
+            //用户登录验证
+            if(!this.telephone){
+              return  MessageBox.alert("请输入手机号")
+            }else if(!this.code){
+             return MessageBox.alert("验证码不正确")
+            }else{
+              const {telephone,code} =this
+              console.log(telephone,code)
+              const result = await reqSmsCode(telephone,code)
+              if(result.code === 0){
+                console.log("登录成功")
+                const {phone,_id} = result.data
+                console.log("手机号为:",phone,_id)
+                Toast(`欢迎你${phone}`)
+                this.$emit("sussess",phone)
+                return (phone,_id)
+              }else{
+                console.log("登录失败")
+               return  MessageBox.alert("登录失败")
+              }
+            }
+
+
+
           }
+
         },
 
 
@@ -176,7 +248,7 @@
           input
             width 100%
             height 100%
-            font-size .24rem
+            font-size .30rem
             color rgb(127,127,127)
             outline none
             border none
@@ -190,7 +262,7 @@
           input
             width 100%
             height 100%
-            font-size .24rem
+            font-size .30rem
             color rgb(127,127,127)
             outline none
             border none

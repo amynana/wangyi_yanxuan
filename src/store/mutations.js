@@ -1,4 +1,12 @@
-import {GETSORTLISTS,GETSCROLLIMG,GETCATEGROYS,GETRECOMMENDS,GETSEESORTS,GETSEETWOS} from "./mutations-type.js"
+import {
+  GETSORTLISTS,
+  GETSCROLLIMG,
+  GETCATEGROYS,
+  GETRECOMMENDS,
+  GETSEESORTS,
+  GETSEETWOS,
+  GETSMSCODE
+} from "./mutations-type.js"
 
 
 
@@ -20,5 +28,8 @@ export default {
   },
   [GETSEETWOS](state,{seeTwos}){
     state.seeTwos = seeTwos
+  },
+  [GETSMSCODE](state,{SmsCode}){
+    state.SmsCode = SmsCode
   }
 }
