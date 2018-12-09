@@ -6,8 +6,8 @@
           <div class="line">
             <a href="#" class="logo"></a>
             <div class="m-topSearchIpt">
-              <i class="icon"></i>
-              <span class="placeholder">搜索商品, 共19914款好物</span>
+              <i class="iconfont icon-sousuo  icon-two"></i>
+              <input type="text" placeholder="爆款好物" class="search-input" @focus="$router.replace('/search')">
             </div>
             <div class="loginBtn">登录</div>
           </div>
@@ -293,6 +293,7 @@
 
 
 
+
         </div>
 
       </div>
@@ -396,20 +397,14 @@ import {mapState} from "vuex"
         justify-content center
         height .56rem
         font-size .28rem
-        background-color #ededed
         border-radius .08rem
         flex-grow 1
-        .icon
-          display inline-block
-          vertical-align middle
-          width .28rem
-          height .28rem
-          margin-right .1rem
-          background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-2fb94833aa.png)
-          background-repeat no-repeat
-          background-size 100% 100%
-        .placeholder
-          color #666
+        .search-input
+           width 100%
+           height 100%
+           color #666
+           outline none
+           border 1px solid rgb(230, 230, 230)
       .loginBtn
         width .72rem
         height .38rem

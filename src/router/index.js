@@ -6,6 +6,7 @@ import See from '../routes/See/See'
 import Shop from '../routes/Shop/Shop'
 import Profile from '../routes/Profile/Profile'
 import NotFound from "../routes/NotFound/NotFound.vue"
+import Search from "../routes/Search/Search.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +43,10 @@ export default new Router({
     {
       path:'/profile',
       component:Profile,
+    },
+    {
+      path:'/search',
+      component:Search
     },
     {
       path:'/',
