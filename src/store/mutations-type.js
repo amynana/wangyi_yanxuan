@@ -7,4 +7,6 @@ export const GETSEETWOS = 'get-see-twos'
 export const GETSMSCODE = 'get-sms-code'
 export const GETBEFORETEXT = 'get-before-text'
 export const GETAFTERTEXT = 'get-after-text'
+export const GETLISTSHOPS = 'get-list-shops'
+export const GETSESRCHSHOPS = 'get-search-shops'
 

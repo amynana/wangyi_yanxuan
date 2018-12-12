@@ -28,3 +28,9 @@ export const reqSmsCode = (phone,code)=>ajax(HOU +'/login_sms',{phone,code},"POS
 export const reqBeforeText =()=>ajax(SH+'/search/init.json',"POST")
 
 export const reqTextOnline = ({keywordPrefix})=>ajax(SH + '/search/searchAutoComplete.json',{keywordPrefix},"POST")
+
+//得到点击每一个li的商品列表
+export const reqListShops = ({url}) => ajax(SH +`${url}`)
+
+//得到输入框的关键字的搜索列表
+export const reqSearchShops = ({url}) => ajax(SH +`${url}`)

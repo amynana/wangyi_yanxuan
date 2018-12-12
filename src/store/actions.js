@@ -7,7 +7,9 @@ import {
   GETSEETWOS,
   GETSMSCODE,
   GETBEFORETEXT,
-  GETAFTERTEXT
+  GETAFTERTEXT,
+  GETLISTSHOPS,
+  GETSESRCHSHOPS
 } from "./mutations-type.js"
 import {
   reqSortLists,
@@ -19,6 +21,8 @@ import {
   reqSendCode,
   reqBeforeText,
   reqTextOnline,
+  reqListShops,
+  reqSearchShops
 } from "../api/index.js"
 
 export default{
@@ -77,9 +81,25 @@ export default{
   async getTextOnline({commit},{keywordPrefix}){
    const result =   await reqTextOnline({keywordPrefix})
     if(result.code === "200"){
-     console.log("发送成功")
      const afterTexts = result.data
       commit(GETAFTERTEXT,{afterTexts})
+    }
+  },
+  async getListShops({commit},{url}){
+
+   const result = await  reqListShops({url})
+    console.log("result为",result)
+    if(result.code === '200'){
+     const listShops = result.data
+      commit(GETLISTSHOPS,{listShops})
+    }
+  },
+  async getSearchShop({commit},{url}){
+   const result = await reqSearchShops({url})
+
+    if(result.code === '200'){
+     const SearchShops = result.data
+      commit(GETSESRCHSHOPS,{SearchShops})
     }
   }
 

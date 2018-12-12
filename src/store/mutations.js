@@ -7,7 +7,9 @@ import {
   GETSEETWOS,
   GETSMSCODE,
   GETBEFORETEXT,
-  GETAFTERTEXT
+  GETAFTERTEXT,
+  GETLISTSHOPS,
+  GETSESRCHSHOPS
 } from "./mutations-type.js"
 
 
@@ -39,5 +41,11 @@ export default {
   },
   [GETAFTERTEXT](state,{afterTexts}){
     state.afterTexts = afterTexts
+  },
+  [GETLISTSHOPS](state,{listShops}){
+    state.listShops = listShops
+  },
+  [GETSESRCHSHOPS](state,{SearchShops}){
+    state.listShops = SearchShops
   }
 }

@@ -4,7 +4,7 @@
         <div class="top">
           <div class="top-search">
             <i class="iconfont icon-sousuo  icon-two"></i>
-            <input type="text" class="s-input" v-model="searchText" :placeholder="placeVal">
+            <input type="text" class="s-input" v-model="searchText" :placeholder="placeVal"  @keyup.enter="handleInput">
           </div>
 
         </div>
@@ -18,7 +18,7 @@
         </div>
         <div class="after-s" v-if="isShowAfter">
           <ul class="after-ul">
-            <li class="after-li" v-for="(afterText,index) in afterTexts" @click="showDetail">{{afterText}}</li>
+            <li class="after-li" v-for="(afterText,index) in afterTexts" @click="showDetail(afterText)">{{afterText}}</li>
           </ul>
         </div>
         <div class="Detail" v-if="isShowDetail">
@@ -29,19 +29,17 @@
           </div>
           <div class="detail-show">
             <div class="detail-wrap">
-              <div class="left">
+              <div class="left" v-for="(list,index) in listShops.directlyList">
                 <div class="l-img">
-                  <img src="http://yanxuan.nosdn.127.net/5f1d15da612ccfc820d42e1510f42dd4.png?imageView&quality=65&thumbnail=330x330" alt="">
+                  <img :src="list.listPicUrl" alt="">
                 </div>
                 <div class="l-text">每满200减30</div>
                 <div class="l-foot">
-                  <span class="des">男童保暖内衣</span>
-                  <span class="price">￥99</span>
+                  <span class="des">{{list.name}}</span>
+                  <span class="price">￥{{list.retailPrice}}</span>
                 </div>
               </div>
-              <div class="right">
-                <div class="r-img"></div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -64,7 +62,7 @@
 
         },
       computed:{
-        ...mapState(["beforeTexts","afterTexts"]),
+        ...mapState(["beforeTexts","afterTexts",'listShops']),
         placeVal(){
           if(this.beforeTexts.defaultKeyword){
             return this.beforeTexts.defaultKeyword.keyword
@@ -94,10 +92,20 @@
         }
       },
       methods:{
-        showDetail(){
+        showDetail(afterText){
           this.isShowBefore = false
           this.isShowAfter = false
           this.isShowDetail = true
+          let keyWord2 = afterText
+          const url = `search/search.json?keyword=${keyWord2}&sortType=0&descSorted=false&categoryId=0&matchType=0&floorPrice=-1&upperPrice=-1&size=40&itemId=0&stillSearch=false&searchWordSource=7&_stat_search=autoComplete`
+          this.$store.dispatch('getListShops',{url})
+        },
+        handleInput(){
+          this.isShowBefore = false
+          this.isShowAfter = false
+          this.isShowDetail = true
+          const url = `search/search.json?keyword=${this.searchText}&sortType=0&descSorted=false&categoryId=0&matchType=0&floorPrice=-1&upperPrice=-1&size=40&itemId=0&stillSearch=false&searchWordSource=1&_stat_search=userhand`
+          this.$store.dispatch('getSearchShop',{url})
         }
       }
 
@@ -220,8 +228,8 @@
         .left
           width 3.7rem
           height 5.2583rem
-          border 1px solid red
           float left
+          margin-top .3rem
           .l-img
               width 3.7rem
               height 3.75rem
@@ -254,11 +262,8 @@
               display inline-block
               font-size .3rem
               color rgb(198, 16, 16)
-        .right
-          width 3.7rem
-          height 5.2583rem
-          border 1px solid red
-          float right
+              margin-bottom .3rem
+
 
 
 
