@@ -25,6 +25,14 @@ module.exports = {
           '^/houtai': '/'
         }
       },
+
+      '/sh': {
+        target: 'http://m.you.163.com/xhr',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/sh': '/'
+        }
+      },
     },
 
     // Various Dev Server settings

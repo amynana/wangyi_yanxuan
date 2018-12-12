@@ -5,7 +5,9 @@ import {
   GETRECOMMENDS,
   GETSEESORTS,
   GETSEETWOS,
-  GETSMSCODE
+  GETSMSCODE,
+  GETBEFORETEXT,
+  GETAFTERTEXT
 } from "./mutations-type.js"
 import {
   reqSortLists,
@@ -15,6 +17,8 @@ import {
   reqSeeSorts,
   reqSeeTwos,
   reqSendCode,
+  reqBeforeText,
+  reqTextOnline,
 } from "../api/index.js"
 
 export default{
@@ -61,6 +65,23 @@ export default{
       commit(GETSEETWOS,{seeTwos})
     }
   },
+
+  async  getBeforeText({commit}){//得到搜索之前的数据
+    const result = await reqBeforeText()
+    if(result.code === "200"){
+      const beforeTexts = result.data
+      commit(GETBEFORETEXT,{beforeTexts})
+    }
+  },
+
+  async getTextOnline({commit},{keywordPrefix}){
+   const result =   await reqTextOnline({keywordPrefix})
+    if(result.code === "200"){
+     console.log("发送成功")
+     const afterTexts = result.data
+      commit(GETAFTERTEXT,{afterTexts})
+    }
+  }
 
 
 

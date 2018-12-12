@@ -4,6 +4,7 @@
 import ajax from "./ajax"
 const BASE = '/api'
 const HOU = '/houtai'
+const SH ='/sh'
 export const reqSortLists = ()=> ajax('/home')  //记住用mock模拟的数据，这里的路径只能是在mockServer.js中定义的路径
 export const reqscrollImg = ()=>ajax('/scrollImg')//获取首页轮播图的数据
 export const reqCategroy = ()=>ajax('/categroy') //获取分类页的列表数据
@@ -20,3 +21,10 @@ export const reqSmsCode = (phone,code)=>ajax(HOU +'/login_sms',{phone,code},"POS
 //9.根据会话获取用户信息
 
 //10.用户退出
+
+
+//search页面的数据
+
+export const reqBeforeText =()=>ajax(SH+'/search/init.json',"POST")
+
+export const reqTextOnline = ({keywordPrefix})=>ajax(SH + '/search/searchAutoComplete.json',{keywordPrefix},"POST")

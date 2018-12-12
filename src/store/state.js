@@ -6,4 +6,6 @@ export default {
   seeSorts:[],
   seeTwos:{},
   SmsCode:"",
+  beforeTexts:{},
+  afterTexts:[],
 }

@@ -5,7 +5,9 @@ import {
   GETRECOMMENDS,
   GETSEESORTS,
   GETSEETWOS,
-  GETSMSCODE
+  GETSMSCODE,
+  GETBEFORETEXT,
+  GETAFTERTEXT
 } from "./mutations-type.js"
 
 
@@ -31,5 +33,11 @@ export default {
   },
   [GETSMSCODE](state,{SmsCode}){
     state.SmsCode = SmsCode
+  },
+  [GETBEFORETEXT](state,{beforeTexts}){
+    state.beforeTexts = beforeTexts
+  },
+  [GETAFTERTEXT](state,{afterTexts}){
+    state.afterTexts = afterTexts
   }
 }
